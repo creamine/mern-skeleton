@@ -10,6 +10,7 @@ These variables will give us the flexibility to change values from a single file
 Next, we will add the run scripts, which will allow us to run and debug the backend implementation.
 
 */
+import { mongoAtlas } from "./mongoAtlasCreds"; // A simple javascript file exporting the credentials object mongoAtlas = {username: ..}
 
 const config = {
   env: process.env.NODE_ENV || "development",
@@ -17,12 +18,7 @@ const config = {
   jwtSecret: process.env.JWT_SECRET || "YOUR_secret_key",
   mongoUri:
     process.env.MONGODB_URI ||
-    process.env.MONGO_HOST ||
-    "mongodb://" +
-      (process.env.IP || "localhost") +
-      ":" +
-      (process.env.MONGO_PORT || "27017") +
-      "/mernproject",
+    `mongodb+srv://${mongoAtlas.username}:${mongoAtlas.password}@${mongoAtlas.server}/${mongoAtlas.db}`,
 };
 
 export default config;

@@ -2,7 +2,7 @@
 // This controller will make use of the errorHandler helper to respond to route requests with meaningful messages when a Mongoose error occurs.
 import User from "../models/user.model";
 import extend from "lodash/extend";
-import errorHandler from "./error.controller";
+import errorHandler from "./../helpers/dbErrorHandler";
 
 /* create: This function creates a new user with the user JSON object that's received in the POST request from the frontend within req.body. 
 The call to user.save attempts to save the new user in the database after Mongoose has performed a validation check on the data. 
