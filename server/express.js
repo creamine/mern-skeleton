@@ -7,6 +7,7 @@ import compress from "compression";
 import cors from "cors";
 import helmet from "helmet";
 import Template from "./../template";
+import userRoutes from "./routes/user.routes";
 
 const app = express();
 // Parse body params and attache them to req.body
@@ -17,6 +18,7 @@ app.use(compress());
 
 app.use(helmet()); // Secure apps by setting various HTTP headers
 app.use(cors()); // Enable CORS - Cross Origin Resource Sharing
+app.use("/", userRoutes); // Mount user API route
 
 app.get("/", (req, res) => {
   res.status(200).send(Template());
