@@ -45,13 +45,13 @@ const userByID = async (req, res, next, id) => {
   try {
     let user = await User.findById(id);
     if (!user)
-      return res.status("400").json({
+      return res.status(400).json({
         error: "User not found",
       });
     req.profile = user;
     next();
   } catch (err) {
-    return res.status("400").json({
+    return res.status(400).json({
       error: "Could not retrieve user",
     });
   }
@@ -90,7 +90,7 @@ On successful deletion, the requesting client is returned the deleted user objec
 const remove = async (req, res) => {
   try {
     let user = req.profile;
-    let deletedUser = await user.remove();
+    let deletedUser = await User.deleteOne({ _id: user._id });
     deletedUser.hashed_password = undefined;
     deletedUser.salt = undefined;
     res.json(deletedUser);

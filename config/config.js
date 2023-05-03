@@ -18,7 +18,8 @@ const config = {
   jwtSecret: process.env.JWT_SECRET || "YOUR_secret_key",
   mongoUri:
     process.env.MONGODB_URI ||
-    `mongodb+srv://${mongoAtlas.username}:${mongoAtlas.password}@${mongoAtlas.server}/${mongoAtlas.db}`,
+    `mongodb+srv://${mongoAtlas.username}:${mongoAtlas.password}@${mongoAtlas.server}/`,
+  mongoDB: `${mongoAtlas.db}`,
 };
 
 export default config;

@@ -5,10 +5,13 @@ import mongoose from "mongoose";
 
 // Mongoose setup and connection to MongoDB
 mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoUri, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
+mongoose.connect(
+  config.mongoUri,
+  { dbName: config.mongoDB },
+  { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
+);
+mongoose.connection.once("open", () => {
+  console.log("Connected to mongodb: " + config.mongoDB);
 });
 mongoose.connection.on("error", () => {
   throw new Error(`unable to connect to database: ${config.mongoUri}`);

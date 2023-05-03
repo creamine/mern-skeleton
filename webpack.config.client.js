@@ -5,11 +5,16 @@ const CURRENT_WORKING_DIR = process.cwd();
 const config = {
   name: "browser",
   mode: "development",
-  devtool: "eval-source-map",
-  entry: [
-    "webpack-hot-middleware/client?reload=true",
-    path.join(CURRENT_WORKING_DIR, "client/main.js"),
-  ],
+  devtool: "inline-source-map",
+  devServer: {
+    hot: true,
+  },
+  entry: {
+    main: [
+      "webpack-hot-middleware/client",
+      path.join(CURRENT_WORKING_DIR, "client/main.js"),
+    ],
+  },
   output: {
     path: path.join(CURRENT_WORKING_DIR, "/dist"),
     filename: "bundle.js",
@@ -23,8 +28,17 @@ const config = {
         use: ["babel-loader"],
       },
       {
-        test: /\.(ttf|eot|svg|gif|jpg|png)(\?[\s\S]+)?$/,
-        use: "file-loader",
+        test: /\.s[ac]ss$/i,
+        exclude: /node_modules/,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+      {
+        test: /\.(ttf|eot|otf|woff|woff2)$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(jpeg|ico|svg|gif|jpg|png)(\?[\s\S]+)?$/,
+        use: ["file-loader"],
       },
     ],
   },

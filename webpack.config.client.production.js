@@ -16,8 +16,13 @@ const config = {
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
+      //{
+      //  test: /\.s[ac]ss$/i,
+      //  exclude: /node_modules/,
+      //  use: ["sass-loader", "style-loader", "css-loader"],
+      //},
       {
-        test: /\.(ttf|eot|svg|gif|jpg|png)(\?[\s\S]+)?$/,
+        test: /\.(ttf|ico|eot|svg|gif|jpg|png)(\?[\s\S]+)?$/,
         use: "file-loader",
       },
     ],

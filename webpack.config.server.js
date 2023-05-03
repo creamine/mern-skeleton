@@ -16,13 +16,22 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
       {
-        test: /\.(ttf|eot|svg|gif|jpg|png)(\?[\s\S]+)?$/,
-        use: "file-loader",
+        test: /\.(ttf|eot|otf|woff|woff2)$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        exclude: /node_modules/,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+      {
+        test: /\.(jpeg|ico|svg|gif|jpg|png)(\?[\s\S]+)?$/,
+        use: ["file-loader"],
       },
     ],
   },

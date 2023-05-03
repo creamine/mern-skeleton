@@ -61,14 +61,14 @@ UserSchema.methods = {
   },
   // encryptPassword: This method is used to generate an encrypted hash from the plain-text password and a unique salt value using the crypto module from Node.
   encryptPassword: function (password) {
-    if (!password) return "";
+    if (!password) return "encryp error 1";
     try {
       return crypto
         .createHmac("sha1", this.salt)
         .update(password)
         .digest("hex");
     } catch (err) {
-      return "";
+      return "encryp error 2";
     }
   },
   // makeSalt: This method generates a unique and random salt value using the current timestamp at execution and Math.random().
